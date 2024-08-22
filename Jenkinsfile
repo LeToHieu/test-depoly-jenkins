@@ -2,9 +2,9 @@ pipeline {
 
     agent any
 
-    tools { 
-        maven 'my-maven' 
-    }
+    // tools { 
+    //     maven 'my-maven' 
+    // }
     environment {
         MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
     }
@@ -12,6 +12,10 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
+                git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
+                withMaven {
+                    sh "mvn clean verify"
+                } 
                 sh 'mvn --version'
                 sh 'java -version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
