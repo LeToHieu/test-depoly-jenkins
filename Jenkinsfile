@@ -8,7 +8,7 @@ pipeline {
     environment {
         MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
         tools {
-        'docker' 'docker'
+        'docker' = 'docker'
         }
     }
     stages {
