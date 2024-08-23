@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                 //     docker.withTool('docker'){
-                        docker.withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+                        withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
                             sh 'docker build -t khinesss/springboot .'
                             sh 'docker push khinesss/springboot'
                     //     }
