@@ -1,15 +1,12 @@
 pipeline {
 
-    agent{
-        any
-        docker { image 'node:20.17.0-alpine3.20' }
-    }
+    agent any
 
     // tools { 
     //     maven 'my-maven' 
     // }
     tools {
-        // 'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
 
         'maven' 'my-maven' 
     }
@@ -34,7 +31,7 @@ pipeline {
         stage('Packaging/Pushing images') {
             steps {
                 script {
-                     sh 'docker image pull mysql:8.0'
+                    agent { docker { image 'node:20.17.0-alpine3.20' }}
                 //     docker.withTool('docker'){
                         withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/', toolName: 'docker') {
                             sh 'docker build -t khinesss/springboot .'
