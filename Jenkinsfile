@@ -23,7 +23,6 @@ pipeline {
                 // } 
                 sh 'mvn --version'
                 sh 'docker --version'
-                sh 'docker image pull mysql:8.0'
                 sh 'java -version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
             }
@@ -32,7 +31,7 @@ pipeline {
         stage('Packaging/Pushing images') {
             steps {
                 script {
-                    //  sh 'docker image pull mysql:8.0'
+                     sh 'docker image pull mysql:8.0'
                 //     docker.withTool('docker'){
                         withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/', toolName: 'docker') {
                             sh 'docker build -t khinesss/springboot .'
