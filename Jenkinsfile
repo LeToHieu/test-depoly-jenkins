@@ -8,7 +8,7 @@ pipeline {
     environment {
         MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
         tools {
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'docker' 'docker'
         }
     }
     stages {
