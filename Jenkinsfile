@@ -7,6 +7,7 @@ pipeline {
     // }
     tools {
         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'maven' 'my-maven' 
     }
     environment {
         MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
