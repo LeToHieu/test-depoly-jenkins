@@ -6,7 +6,7 @@ pipeline {
     //     maven 'my-maven' 
     // }
     tools {
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'docker' 'my-docker'
         'maven' 'my-maven' 
     }
     environment {
