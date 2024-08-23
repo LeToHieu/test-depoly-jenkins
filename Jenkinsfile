@@ -5,6 +5,9 @@ pipeline {
     // tools { 
     //     maven 'my-maven' 
     // }
+    tools {
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+    }
     environment {
         MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
     }
@@ -16,7 +19,6 @@ pipeline {
                 // withMaven {
                 //     sh "mvn clean verify"
                 // } 
-                sh 'docker --version'
                 sh 'mvn --version'
                 sh 'java -version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
@@ -25,9 +27,11 @@ pipeline {
 
         stage('Packaging/Pushing images') {
             steps {
-                withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t khinesss/springboot .'
-                    sh 'docker push khinesss/springboot'
+                docker.withTool('docker'){
+                    withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+                        sh 'docker build -t khinesss/springboot .'
+                        sh 'docker push khinesss/springboot'
+                    }
                 }
             }
         }
