@@ -6,7 +6,7 @@ pipeline {
     //     maven 'my-maven' 
     // }
     tools {
-        'docker' 'my-docker'
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
         'maven' 'my-maven' 
     }
     environment {
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Packaging/Pushing images') {
             steps {
-                withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+                docker.withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t khinesss/springboot .'
                     sh 'docker push khinesss/springboot'
                 }
