@@ -16,9 +16,7 @@ pipeline {
                 // withMaven {
                 //     sh "mvn clean verify"
                 // } 
-                docker.withTool('docker'){
-                    sh 'docker --version'
-                }
+                sh 'docker --version'
                 sh 'mvn --version'
                 sh 'java -version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
