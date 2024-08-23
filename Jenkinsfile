@@ -1,12 +1,11 @@
 pipeline {
 
     agent any
-
     // tools { 
     //     maven 'my-maven' 
     // }
     tools {
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        // 'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
 
         'maven' 'my-maven' 
     }
@@ -31,7 +30,6 @@ pipeline {
         stage('Packaging/Pushing images') {
             steps {
                 script {
-                    agent { docker { image 'node:20.17.0-alpine3.20' }}
                 //     docker.withTool('docker'){
                         withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/', toolName: 'docker') {
                             sh 'docker build -t khinesss/springboot .'
