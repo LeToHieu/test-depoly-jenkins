@@ -6,7 +6,7 @@ pipeline {
     //     maven 'my-maven' 
     // }
     tools {
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'docker' 'docker'
         'maven' 'my-maven' 
     }
     environment {
@@ -20,6 +20,7 @@ pipeline {
                 // withMaven {
                 //     sh "mvn clean verify"
                 // } 
+                sh 'docker --version'
                 sh 'mvn --version'
                 sh 'java -version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
