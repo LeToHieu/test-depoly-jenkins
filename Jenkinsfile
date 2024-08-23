@@ -31,6 +31,7 @@ pipeline {
         stage('Packaging/Pushing images') {
             steps {
                 script {
+                     sh 'docker image pull mysql:8.0'
                 //     docker.withTool('docker'){
                         withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/', toolName: 'docker') {
                             sh 'docker build -t khinesss/springboot .'
